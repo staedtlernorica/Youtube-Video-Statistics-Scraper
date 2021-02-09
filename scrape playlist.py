@@ -4,8 +4,7 @@ from googleapiclient.discovery import build
 api_key = 'AIzaSyBT8wA9JslanCzQeKmqQoZShVVtMXBUApI'
 youtube = build('youtube', 'v3', developerKey = api_key)
 
-#some sample playlist
-#simon_bolivar = 'PLhyKYa0YJ_5CIrQUO2LE2WDI9YqGl7bYr'
+
 eh = 'PLhyKYa0YJ_5Aq7g4bil7bnGi0A8gTsawu'
 
 #----------------------------------------------------------------------------
