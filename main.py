@@ -10,7 +10,7 @@ def scrape(user_input = {}):
         scrape_playlist.save_path = user_input["-save_to-"]
 
     if user_input["-save_as-"] != "":
-        scrape_playlist.csv_name = user_input["-save_as-"]
+        scrape_playlist.csv_name = user_input["-save_as-"].replace(".csv",'')
 
     if 'playlist' in user_input["-yt_link-"]:
         raw_url = user_input["-yt_link-"]
@@ -44,8 +44,8 @@ while True:
       if event == 'Submit' and (values["-yt_link-"] != ''):      
         scrape(values)
 
-        #reset path/file name, o/w remembers from last input, even
-        #if input field are cleared
+        #reset path/file name after scraping, o/w remembers 
+        #from last input, even if input fields are cleared
         scrape_playlist.save_path = config.default_save_path    
         scrape_playlist.csv_name = config.default_csv_name
 
