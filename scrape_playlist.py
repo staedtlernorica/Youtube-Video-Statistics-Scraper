@@ -88,9 +88,7 @@ def main():
         for currentRow in final_playlist_stats:
             csvwriter.writerow(currentRow)
 
+
 if __name__ == "__main__":
     if (playlist_id and save_path) != '':
         main()
-
-
-
