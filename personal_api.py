@@ -1,1 +1,1 @@
-api_key = 'Enter your Youtube API key here'
+api_key = 'AIzaSyBT8wA9JslanCzQeKmqQoZShVVtMXBUApI'

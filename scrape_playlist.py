@@ -3,13 +3,12 @@ from googleapiclient.discovery import build
 api_key = personal_api.api_key
 youtube = build('youtube', 'v3', developerKey = api_key)
 
-import os
-from datetime import date
+import config
 #default values; overidden if user enters anything else
-save_path = f"{os.getenv('USERPROFILE')}/Desktop" 
-today = str(date.today())
-csv_name = f"Scraped Youtube { today}"
+save_path = config.default_save_path
+csv_name = config.default_csv_name
 playlist_id = ''  
+
 
 def get_playlist_vid_id(token='', playlist = '', target = "snippet"):
 
@@ -84,7 +83,6 @@ def main():
             keep_running = False
 
     import csv
-    print(f"{save_path}/{csv_name}.csv")
     with open(f"{save_path}/{csv_name}.csv", 'w', newline='',encoding='UTF-8') as csvfile:
         csvwriter = csv.writer(csvfile)
         for currentRow in final_playlist_stats:
