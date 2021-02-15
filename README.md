@@ -26,7 +26,17 @@ The program should function correctly afterwards. Double click on "main.pyw" and
 3. In the `CSV name` field, if you leave it blank, the CSV will be named `Scraped Youtube dd/mm/yyyy.csv`.
 
 
+There are some limitations with the current script:
+1. Only works on Python 3.6+
+2. Only work on Windows 10 (possibly 8.1/8/7; have not been able to test)
+3. Can only scrape publicly available videos; will not work on premium/paid videos
+   * uncertain on how regionally locked videos will be affected
+4. Can only scrape public playlists
+5. Can only scrape channels with at least one uploaded video
+6. The script is limited up to Google's daily [10,000 unit quota](https://developers.google.com/youtube/v3/getting-started#quota), i.e. if you scrape an obscene amount of videos, the script won't work until your next daily 10,000 quota. 
+   * this truly is an obscene amount of scraping, easily equalling several thousands videos.
 
+If the script crashes, it's because it has run into an error, either from these limitations, or the link is wrong. 
 
 
 
