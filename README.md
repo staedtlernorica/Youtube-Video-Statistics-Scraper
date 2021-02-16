@@ -1,5 +1,10 @@
 # Youtube-Video-Info-Scraper
 
+- [ ] User pandas and convert youtube JSON objects to more readable df (for readability purposes)
+- [ ] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
+
+
+
 This script will automatically scrape the statistics<sup>1</sup> of every video from any channel/playlist the user gives it. There a few steps to complete to get this script working:
 * get your Youtube API key ([text](https://www.slickremix.com/docs/get-api-key-for-youtube/)/[video](https://www.youtube.com/watch?v=th5_9woFJmk) guide), and paste it into personal_api.py 
 * make sure you have Python 3.6+ installed 
