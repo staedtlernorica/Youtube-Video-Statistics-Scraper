@@ -1,6 +1,7 @@
 # Youtube-Video-Info-Scraper
 
 - [ ] User pandas and convert youtube JSON objects to more readable df (for readability purposes)
+   *https://stackoverflow.com/q/41168558/6030118
 - [ ] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
 
 
