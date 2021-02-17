@@ -43,7 +43,7 @@ def get_stats_from_vids_json(statDictObj = {}):
     temp_list = []
 
     for i in statDictObj['items']:
-        
+       
         vidId = i['id']
         #need contentDetails in scrape_yt_vids_dict
         playtime = i['contentDetails']['duration']  
@@ -51,7 +51,7 @@ def get_stats_from_vids_json(statDictObj = {}):
         vidDuration = isodate.parse_duration(playtime).total_seconds()
         vidTitle = i['snippet']['title']
         #[:10] only want upload dates, not hour 
-        vidDate = i['snippet']['publishedAt'][:10]              
+        vidDate = i['snippet']['publishedAt'][:10]             
         vidViews = i['statistics']['viewCount']
         vidLikes = i['statistics']['likeCount']
         vidDislikes = i['statistics']['dislikeCount']
@@ -82,11 +82,13 @@ def main():
         if next_token == '':
             keep_running = False
 
-    import csv
-    with open(f"{save_path}/{csv_name}.csv", 'w', newline='',encoding='UTF-8') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        for currentRow in final_playlist_stats:
-            csvwriter.writerow(currentRow)
+    return final_playlist_stats
+
+    # import csv
+    # with open(f"{save_path}/{csv_name}.csv", 'w', newline='',encoding='UTF-8') as csvfile:
+    #     csvwriter = csv.writer(csvfile)
+    #     for currentRow in final_playlist_stats:
+    #         csvwriter.writerow(currentRow)
 
 
 if __name__ == "__main__":
