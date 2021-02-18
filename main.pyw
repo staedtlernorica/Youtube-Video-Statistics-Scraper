@@ -11,14 +11,12 @@ import sorting_youtube_link as syl
 
 def ask_directory(x):
 
-    print("from ask_directory", type(x))
-
     currdir = os.getcwd()
     tempdir = filedialog.asksaveasfile(
         initialfile = config.default_csv_name,
         defaultextension=".csv",
         parent=window, 
-        initialdir=currdir, 
+        initialdir=config.default_save_path, 
         title='Save as:',
         filetypes = (("Comma Separated Values ","*.csv"),("all files","*.*")),
         confirmoverwrite=True)
@@ -40,9 +38,6 @@ def get_user_input():
     if user_inputs['url'] != '':
         
         parsed_link = syl.parsing_youtube_link(user_inputs['url'])
-        #print(parsed_link)
-        #print(user_inputs["url"])
-        print(parsed_link)
 
         if user_inputs['url'] == parsed_link:
             scrape_channel.channel_link = user_inputs['url']
@@ -56,9 +51,6 @@ def get_user_input():
         else:
             scrape_playlist.playlist_id = parsed_link
             scraped_info = scrape_playlist.main()
-
-
-    [print(i) for i in scraped_info]
 
     ask_directory(scraped_info)
 
@@ -92,7 +84,6 @@ submit_button.place(x = 470, y =48, height = 25, width = 83)
 
 window.mainloop()
 
-print(user_inputs)
 
 
 

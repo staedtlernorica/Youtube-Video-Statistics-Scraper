@@ -27,9 +27,6 @@ def get_channel_id(channel_link = ''):
 
 
 def main():
-    
-
-    #A CHANNEL UCNml76gpvMWPyEfqHlZtObA
 
     channel_id = get_channel_id(channel_link)
     print("this is the channel id", channel_id)
@@ -41,13 +38,6 @@ def main():
     id = channel_id).execute()
 
     uploads_id = channel_info["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
-    #print("this is the uploads id", uploads_id)
-    # print(channel_info)
-    # print(uploads_id)
-
-    # import scrape_playlist
-    # scrape_playlist.playlist_id = uploads_id
-    # scrape_playlist.main()
 
     return uploads_id
 
