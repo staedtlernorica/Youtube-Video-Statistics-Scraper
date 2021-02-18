@@ -16,6 +16,8 @@ def get_channel_id(channel_link = ''):
     import requests
     from bs4 import BeautifulSoup
 
+    print(channel_link)
+
     source = requests.get(channel_videos_tab).text
     soup = BeautifulSoup(source, "html.parser")
     a = soup.find('body').find('link')['href']
@@ -25,8 +27,12 @@ def get_channel_id(channel_link = ''):
 
 
 def main():
-            
+    
+
+    #A CHANNEL UCNml76gpvMWPyEfqHlZtObA
+
     channel_id = get_channel_id(channel_link)
+    print("this is the channel id", channel_id)
 
     #https://stackoverflow.com/a/27872244/6030118
     #get channel's uploads playlist
@@ -35,10 +41,15 @@ def main():
     id = channel_id).execute()
 
     uploads_id = channel_info["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    #print("this is the uploads id", uploads_id)
+    # print(channel_info)
+    # print(uploads_id)
 
-    import scrape_playlist
-    scrape_playlist.playlist_id = uploads_id
-    scrape_playlist.main()
+    # import scrape_playlist
+    # scrape_playlist.playlist_id = uploads_id
+    # scrape_playlist.main()
+
+    return uploads_id
 
     
 if __name__ == "__main__":
