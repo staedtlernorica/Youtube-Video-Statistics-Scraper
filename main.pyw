@@ -9,7 +9,9 @@ import sorting_youtube_link as syl
 
 
 
-def ask_directory(x=[]):
+def ask_directory(x):
+
+    print("from ask_directory", type(x))
 
     currdir = os.getcwd()
     tempdir = filedialog.asksaveasfile(
@@ -25,9 +27,7 @@ def ask_directory(x=[]):
         with open(tempdir.name, 'w', newline='',encoding='UTF-8') as csvfile:
             csvwriter = csv.writer(csvfile)
             [csvwriter.writerow(currentRow) for currentRow in x]
-            
-window = Tk()
-ask_directory()
+
 
 
 #https://stackoverflow.com/a/15495560/6030118
@@ -53,14 +53,14 @@ def get_user_input():
             scraped_info = scrape_playlist.main()
 
 
+        else:
+            scrape_playlist.playlist_id = parsed_link
+            scraped_info = scrape_playlist.main()
 
-        # else:
-        #     scrape_playlist.playlist_id = parsed_link
-        #     scraped_info = scrape_playlist.main()
 
+    [print(i) for i in scraped_info]
 
-        [print(i) for i in scraped_info]
-
+    ask_directory(scraped_info)
 
 
 
@@ -87,12 +87,13 @@ user_inputs = {
 user_url = Entry(window, width=60)
 user_url.place(x = 100, y = 50)
 
-submit_button = Button(text="Scrape", command=ask_directory)
+submit_button = Button(text="Scrape", command=get_user_input)
 submit_button.place(x = 470, y =48, height = 25, width = 83)
 
-#window.mainloop()
+window.mainloop()
 
 print(user_inputs)
+
 
 
 
