@@ -8,7 +8,6 @@ import config
 import sorting_youtube_link as syl
 
 
-
 def ask_directory(x):
 
     currdir = os.getcwd()
@@ -27,11 +26,10 @@ def ask_directory(x):
             [csvwriter.writerow(currentRow) for currentRow in x]
 
 
-
 #https://stackoverflow.com/a/15495560/6030118
 def get_user_input():
 
-    user_inputs["url"] = user_url.get()
+    user_inputs["url"] = url_input.get()
 
     parsed_link = ''
     scraped_info = []
@@ -55,9 +53,7 @@ def get_user_input():
     ask_directory(scraped_info)
 
 
-
 window = Tk()
-
 
 window.title("Youtube Channel/Playlist Scraper")
 window.geometry("570x100")
@@ -69,22 +65,17 @@ my_label.place(x = 100, y =20)
 url_label = Label(text="URL:")
 url_label.place(x = 20, y = 50)
 
-
 user_inputs = {
     "url": "",
     "folder": "",
     "csv": ""
 }
 
-user_url = Entry(window, width=60)
-user_url.place(x = 100, y = 50)
+url_input = Entry(window, width=60)
+url_input.place(x = 100, y = 50)
+url_input.focus_set()
 
 submit_button = Button(text="Scrape", command=get_user_input)
 submit_button.place(x = 470, y =48, height = 25, width = 83)
 
 window.mainloop()
-
-
-
-
-

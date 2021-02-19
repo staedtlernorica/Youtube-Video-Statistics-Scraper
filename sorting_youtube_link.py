@@ -1,16 +1,19 @@
-import scrape_channel
-import scrape_playlist
+import scrape_channel as sc
+import scrape_playlist as sp
 
-#urls = "https://www.youtube.com/playlist?list=PLhyKYa0asdYJ_5DTz_FAbdQyXo9TZdx1hTWf"
+#check if valid playlist or channel id
+def check_valid_id(url):
+	try: 
+		sp.get_playlist_vid_id(playlist = url)
+	except:
+		pass
+
+	#need return statement
 
 def parsing_youtube_link(url):
 
-	#print(url)
-
 	if "list=" not in url:
 		return url
-
-
 
 	link = url.replace('https://','')
 	link = link.replace("www.youtube.com",'')
@@ -28,41 +31,3 @@ def parsing_youtube_link(url):
 			break
 
 	return id_only
-
-
-	#scrape_playlist.playlist_id = id_only
-
-
-
-	# try:
-	# 	x = scrape_playlist.get_playlist_vid_id(playlist = id_only)
-	# 	print(x)
-	# 	scrape_playlist.main()
-		
-	# except:
-	# 	pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#parsing_youtube_link(urls)
-
-# x = parsing_youtube_link(urls)
-# print(x)
-
-# scrape_playlist.get_playlist_vid_id(playlist = x)
-
-
-# scrape_playlist.playlist_id = parsing_youtube_link(urls)
-# scrape_playlist.main()
