@@ -2,10 +2,10 @@ from tkinter import *
 from tkinter import filedialog
 import os
 import csv
-import scrape_playlist
-import scrape_channel
+import scrape_playlist as sp
+import scrape_channel as sc
 import config
-import sorting_youtube_link as syl
+import parse_user_input as pui
 
 
 def ask_directory(x):
@@ -15,7 +15,7 @@ def ask_directory(x):
         initialfile = config.default_csv_name,
         defaultextension=".csv",
         parent=window, 
-        initialdir=config.default_save_path, 
+        initialdir=currdir, 
         title='Save as:',
         filetypes = (("Comma Separated Values ","*.csv"),("all files","*.*")),
         confirmoverwrite=True)
@@ -30,25 +30,20 @@ def ask_directory(x):
 def get_user_input():
 
     user_inputs["url"] = url_input.get()
+    user_input = url_input.get()
 
     parsed_link = ''
     scraped_info = []
     if user_inputs['url'] != '':
         
-        parsed_link = syl.parsing_youtube_link(user_inputs['url'])
-
-        if user_inputs['url'] == parsed_link:
-            scrape_channel.channel_link = user_inputs['url']
-            #print(scrape_channel.channel_link)
-            uploads_id = scrape_channel.main()
-            print(uploads_id)
-            scrape_playlist.playlist_id = uploads_id
-            scraped_info = scrape_playlist.main()
-
+        id_tuple = pui.main(user_input)
+        
+        if id_tuple[1] == 0:
+            uploads_id = sc.get_uploads_id(id_tuple[0])
+            scraped_info = sp.main(uploads_id)
 
         else:
-            scrape_playlist.playlist_id = parsed_link
-            scraped_info = scrape_playlist.main()
+            scraped_info = sp.main(id_tuple[0])
 
     ask_directory(scraped_info)
 
@@ -59,8 +54,8 @@ window.title("Youtube Channel/Playlist Scraper")
 window.geometry("570x100")
 window.resizable(0,0)           #https://stackoverflow.com/a/51524693/6030118
 
-my_label = Label(text="Enter the URL:")
-my_label.place(x = 100, y =20)
+my_label = Label(text="Enter channel/playlist URL:")
+my_label.place(x = 60, y =20)
 
 url_label = Label(text="URL:")
 url_label.place(x = 20, y = 50)
@@ -72,10 +67,10 @@ user_inputs = {
 }
 
 url_input = Entry(window, width=60)
-url_input.place(x = 100, y = 50)
+url_input.place(x = 60, y = 50)
 url_input.focus_set()
 
-submit_button = Button(text="Scrape", command=get_user_input)
-submit_button.place(x = 470, y =48, height = 25, width = 83)
+submit_button = Button(text="Scrape & Save", command=get_user_input)
+submit_button.place(x = 450, y =47, height = 23, width = 100)
 
 window.mainloop()

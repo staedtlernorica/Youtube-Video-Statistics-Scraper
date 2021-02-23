@@ -3,8 +3,6 @@ from googleapiclient.discovery import build
 api_key = personal_api.api_key
 youtube = build('youtube', 'v3', developerKey = api_key)
 
-playlist_id = ''  
-
 
 def get_playlist_vid_id(token='', playlist = '', target = "snippet"):
 
@@ -59,13 +57,13 @@ def get_stats_from_vids_json(statDictObj = {}):
     return temp_list
 
 
-def main():
+def main(user_input):
     keep_running = True
     next_token = ''
     final_playlist_stats = []
     while keep_running == True:
 
-        json_vid_id = get_playlist_vid_id(next_token, playlist_id, "contentDetails")
+        json_vid_id = get_playlist_vid_id(next_token, user_input, "contentDetails")
         next_token = json_vid_id.get('nextPageToken', '')
 
         vid_ids = get_vid_ids_from_json(json_vid_id)
@@ -80,6 +78,3 @@ def main():
     return final_playlist_stats
 
 
-if __name__ == "__main__":
-    if (playlist_id) != '':
-        main()
