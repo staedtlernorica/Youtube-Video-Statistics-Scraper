@@ -16,6 +16,7 @@ This script will automatically scrape the statistics<sup>1</sup> of every video 
 
    Packages | Install command
    ------------ | -------------
+   isodate | `pip install isodate`
    bs4 | `pip install bs4`
    googleapiclient | `pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib`
 
