@@ -45,7 +45,9 @@ def get_user_input():
         else:
             scraped_info = sp.main(id_tuple[0])
 
+    progress_label['text'] = 'Waiting for save location.'
     ask_directory(scraped_info)
+    progress_label['text'] = 'Saved file. Ready to scrape again.'
 
 
 window = Tk()
@@ -55,10 +57,16 @@ window.geometry("570x100")
 window.resizable(0,0)           #https://stackoverflow.com/a/51524693/6030118
 
 my_label = Label(text="Enter channel/playlist URL:")
-my_label.place(x = 60, y =20)
+my_label.place(x = 60, y =10)
 
 url_label = Label(text="URL:")
-url_label.place(x = 20, y = 50)
+url_label.place(x = 20, y = 35)
+
+status_label = Label(text="Status:")
+status_label.place(x = 20, y = 70)
+
+progress_label = Label(text="Waiting for user input.")
+progress_label.place(x = 65, y = 70)
 
 user_inputs = {
     "url": "",
@@ -67,10 +75,10 @@ user_inputs = {
 }
 
 url_input = Entry(window, width=60)
-url_input.place(x = 60, y = 50)
+url_input.place(x = 65, y = 35)
 url_input.focus_set()
 
 submit_button = Button(text="Scrape & Save", command=get_user_input)
-submit_button.place(x = 450, y =47, height = 23, width = 100)
+submit_button.place(x = 450, y =32, height = 23, width = 100)
 
 window.mainloop()

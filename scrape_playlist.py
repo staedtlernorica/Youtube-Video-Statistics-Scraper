@@ -38,21 +38,21 @@ def get_stats_from_vids_json(statDictObj = {}):
 
     for i in statDictObj['items']:
         
-        vidId = i.get('id')
+        vid_id = i.get('id')
         #need contentDetails in scrape_yt_vids_dict
         playtime = i['contentDetails'].get('duration')
         #convert PT5M38S in actual seconds
-        vidDuration = isodate.parse_duration(playtime).total_seconds()
-        vidTitle = i['snippet'].get('title')
+        vid_runtime = isodate.parse_duration(playtime).total_seconds()
+        vid_title = i['snippet'].get('title')
         #[:10] only want upload dates, not hour 
-        vidDate = i['snippet'].get('publishedAt')[:10]              
-        vidViews = i['statistics'].get('viewCount')
-        vidLikes = i['statistics'].get('likeCount')
-        vidDislikes = i['statistics'].get('dislikeCount')
-        vidComments = i['statistics'].get('commentCount')
+        vid_date = i['snippet'].get('publishedAt')[:10]              
+        vid_views = i['statistics'].get('viewCount')
+        vid_likes = i['statistics'].get('likeCount')
+        vid_dislikes = i['statistics'].get('dislikeCount')
+        vid_comments = i['statistics'].get('commentCount')
 
-        temp_list.append((vidTitle, vidDate, vidViews,
-            vidLikes, vidDislikes, vidComments,vidId,vidDuration))
+        temp_list.append((vid_title, vid_date, vid_views,
+            vid_likes, vid_dislikes, vid_comments,vid_id, vid_runtime))
 
     return temp_list
 
@@ -76,5 +76,3 @@ def main(user_input):
             keep_running = False
 
     return final_playlist_stats
-
-
