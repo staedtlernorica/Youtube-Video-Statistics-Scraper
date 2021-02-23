@@ -50,6 +50,14 @@ def get_user_input():
     progress_label['text'] = 'Saved file. Ready to scrape again.'
 
 
+#close when press Esc 
+#https://stackoverflow.com/a/28467330/6030118
+import sys
+def close(event):
+    window.withdraw() # if you want to bring it back
+    sys.exit() # if you want to exit the entire thing
+
+
 window = Tk()
 
 window.title("Youtube Channel/Playlist Scraper")
@@ -81,4 +89,9 @@ url_input.focus_set()
 submit_button = Button(text="Scrape & Save", command=get_user_input, font = (None, 11))
 submit_button.place(x = 388, y =70, height = 25, width = 125)
 
+window.bind('<Escape>', close)
+
+
 window.mainloop()
+
+
