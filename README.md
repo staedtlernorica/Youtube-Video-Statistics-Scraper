@@ -2,10 +2,10 @@
 
 - [ ] User pandas and convert youtube JSON objects to more readable df (for readability purposes)
    *https://stackoverflow.com/q/41168558/6030118
-- [ ] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
-  * present option to remove all incomplete entries (eg from premium vids)
-  * goes well with passing scrape object to a final print/clean up module; leave scraping_playlist only with scraping playlist
-- [ ] Try to use urllib instead of requests in scrape_channel, so one less package installation
+- [x] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
+  - [ ] present option to remove all incomplete entries (eg from premium vids)
+  - [ ] goes well with passing scrape object to a final print/clean up module; leave scraping_playlist only with scraping playlist
+- [x] Try to use urllib instead of requests in scrape_channel, so one less package installation
 
 
 
@@ -17,8 +17,6 @@ This script will automatically scrape the statistics<sup>1</sup> of every video 
    Packages | Install command
    ------------ | -------------
    isodate | `pip install isodate`
-   PySimpleGUI | `pip install PySimpleGUI`
-   requests | `pip install requests`
    bs4 | `pip install bs4`
    googleapiclient | `pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib`
 
