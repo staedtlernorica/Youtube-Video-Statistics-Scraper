@@ -15,7 +15,7 @@ def ask_directory(x):
         initialfile = config.default_csv_name,
         defaultextension=".csv",
         parent=window, 
-        initialdir=currdir, 
+        initialdir=config.default_save_path, 
         title='Save as:',
         filetypes = (("Comma Separated Values ","*.csv"),("all files","*.*")),
         confirmoverwrite=True)
@@ -53,20 +53,20 @@ def get_user_input():
 window = Tk()
 
 window.title("Youtube Channel/Playlist Scraper")
-window.geometry("570x100")
+window.geometry("525x100")
 window.resizable(0,0)           #https://stackoverflow.com/a/51524693/6030118
 
-my_label = Label(text="Enter channel/playlist URL:")
-my_label.place(x = 60, y =10)
+my_label = Label(text="Enter URL or ID of the playlist/channel:", font = (None, 11))
+my_label.place(x =65, y =5)
 
-url_label = Label(text="URL:")
-url_label.place(x = 20, y = 35)
+url_label = Label(text="URL:", font = (None, 11))
+url_label.place(x = 5, y = 35)
 
-status_label = Label(text="Status:")
-status_label.place(x = 20, y = 70)
+status_label = Label(text="Status:", font = (None, 11))
+status_label.place(x = 5, y = 70)
 
-progress_label = Label(text="Waiting for user input.")
-progress_label.place(x = 65, y = 70)
+progress_label = Label(text="Waiting for user input.", font = (None, 11))
+progress_label.place(x =65, y = 70)
 
 user_inputs = {
     "url": "",
@@ -74,11 +74,11 @@ user_inputs = {
     "csv": ""
 }
 
-url_input = Entry(window, width=60)
-url_input.place(x = 65, y = 35)
+url_input = Entry(window, width=55, font = (None, 11))
+url_input.place(x =68, y = 37)
 url_input.focus_set()
 
-submit_button = Button(text="Scrape & Save", command=get_user_input)
-submit_button.place(x = 450, y =32, height = 23, width = 100)
+submit_button = Button(text="Scrape & Save", command=get_user_input, font = (None, 11))
+submit_button.place(x = 388, y =70, height = 25, width = 125)
 
 window.mainloop()
