@@ -3,12 +3,6 @@ from googleapiclient.discovery import build
 api_key = personal_api.api_key
 youtube = build('youtube', 'v3', developerKey = api_key)
 
-import config
-#default values; overidden if user enters anything else
-save_path = config.default_save_path
-csv_name = config.default_csv_name
-playlist_id = ''  
-
 
 def get_playlist_vid_id(token='', playlist = '', target = "snippet"):
 
@@ -44,19 +38,18 @@ def get_stats_from_vids_json(statDictObj = {}):
 
     for i in statDictObj['items']:
         
-        vidId = i['id']
+        vidId = i.get('id')
         #need contentDetails in scrape_yt_vids_dict
-        playtime = i['contentDetails']['duration']  
+        playtime = i['contentDetails'].get('duration')
         #convert PT5M38S in actual seconds
         vidDuration = isodate.parse_duration(playtime).total_seconds()
-        vidTitle = i['snippet']['title']
+        vidTitle = i['snippet'].get('title')
         #[:10] only want upload dates, not hour 
-        vidDate = i['snippet']['publishedAt'][:10]              
-        vidViews = i['statistics']['viewCount']
-        vidLikes = i['statistics']['likeCount']
-        vidDislikes = i['statistics']['dislikeCount']
-        vidComments = i['statistics']['commentCount']
-
+        vidDate = i['snippet'].get('publishedAt')[:10]              
+        vidViews = i['statistics'].get('viewCount')
+        vidLikes = i['statistics'].get('likeCount')
+        vidDislikes = i['statistics'].get('dislikeCount')
+        vidComments = i['statistics'].get('commentCount')
 
         temp_list.append((vidTitle, vidDate, vidViews,
             vidLikes, vidDislikes, vidComments,vidId,vidDuration))
@@ -64,13 +57,13 @@ def get_stats_from_vids_json(statDictObj = {}):
     return temp_list
 
 
-def main():
+def main(user_input):
     keep_running = True
     next_token = ''
     final_playlist_stats = []
     while keep_running == True:
 
-        json_vid_id = get_playlist_vid_id(next_token, playlist_id, "contentDetails")
+        json_vid_id = get_playlist_vid_id(next_token, user_input, "contentDetails")
         next_token = json_vid_id.get('nextPageToken', '')
 
         vid_ids = get_vid_ids_from_json(json_vid_id)
@@ -82,13 +75,6 @@ def main():
         if next_token == '':
             keep_running = False
 
-    import csv
-    with open(f"{save_path}/{csv_name}.csv", 'w', newline='',encoding='UTF-8') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        for currentRow in final_playlist_stats:
-            csvwriter.writerow(currentRow)
+    return final_playlist_stats
 
 
-if __name__ == "__main__":
-    if (playlist_id and save_path) != '':
-        main()

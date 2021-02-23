@@ -1,51 +1,76 @@
-import PySimpleGUI as sg
-import scrape_channel
-import scrape_playlist
+from tkinter import *
+from tkinter import filedialog
+import os
+import csv
+import scrape_playlist as sp
+import scrape_channel as sc
 import config
+import parse_user_input as pui
 
 
-def scrape(user_input = {}):
+def ask_directory(x):
 
-    if user_input["-save_to-"] != "":
-        scrape_playlist.save_path = user_input["-save_to-"]
+    currdir = os.getcwd()
+    tempdir = filedialog.asksaveasfile(
+        initialfile = config.default_csv_name,
+        defaultextension=".csv",
+        parent=window, 
+        initialdir=currdir, 
+        title='Save as:',
+        filetypes = (("Comma Separated Values ","*.csv"),("all files","*.*")),
+        confirmoverwrite=True)
 
-    if user_input["-save_as-"] != "":
-        scrape_playlist.csv_name = user_input["-save_as-"].replace(".csv",'')
-
-    if 'playlist' in user_input["-yt_link-"]:
-        raw_url = user_input["-yt_link-"]
-        pl_id = raw_url.replace("https://",'').replace("www.youtube.com/playlist?list=",'')
-        scrape_playlist.playlist_id = pl_id
-        scrape_playlist.main()
-
-    else: 
-        channel_url = user_input["-yt_link-"]
-        scrape_channel.channel_link = channel_url
-        scrape_channel.main()
+    if tempdir != None:
+        with open(tempdir.name, 'w', newline='',encoding='UTF-8') as csvfile:
+            csvwriter = csv.writer(csvfile)
+            [csvwriter.writerow(currentRow) for currentRow in x]
 
 
-#https://www.geeksforgeeks.org/user-input-in-pysimplegui/
-layout = [ 
-    [sg.Text('URL of Youtube channel/playlist to be scraped:')], 
-    [sg.Text('Link', size =(10, 1)), sg.InputText(key = "-yt_link-")],
-    [sg.Text("Save CSV to:", size =(10, 1)), sg.InputText(key = "-save_to-"), sg.FolderBrowse()], 
-    [sg.Text("CSV name:", size = (10,1)), sg.Input(key = "-save_as-")], 
-    [sg.Submit(), sg.Cancel("Exit")] 
-] 
+#https://stackoverflow.com/a/15495560/6030118
+def get_user_input():
 
-window = sg.Window('Youtube Channel/Playlist Scraper', layout) 
+    user_inputs["url"] = url_input.get()
+    user_input = url_input.get()
 
-while True:      
-      event, values = window.read()      
-      if event == 'Exit'  or event == sg.WIN_CLOSED:      
-        break # exit button clicked      
+    parsed_link = ''
+    scraped_info = []
+    if user_inputs['url'] != '':
+        
+        id_tuple = pui.main(user_input)
+        
+        if id_tuple[1] == 0:
+            uploads_id = sc.get_uploads_id(id_tuple[0])
+            scraped_info = sp.main(uploads_id)
 
-      #only worry about name bc save path and save name has default values
-      if event == 'Submit' and (values["-yt_link-"] != ''):      
-        scrape(values)
+        else:
+            scraped_info = sp.main(id_tuple[0])
 
-        #reset path/file name after scraping, o/w remembers 
-        #from last input, even if input fields are cleared
-        scrape_playlist.save_path = config.default_save_path    
-        scrape_playlist.csv_name = config.default_csv_name
+    ask_directory(scraped_info)
 
+
+window = Tk()
+
+window.title("Youtube Channel/Playlist Scraper")
+window.geometry("570x100")
+window.resizable(0,0)           #https://stackoverflow.com/a/51524693/6030118
+
+my_label = Label(text="Enter channel/playlist URL:")
+my_label.place(x = 60, y =20)
+
+url_label = Label(text="URL:")
+url_label.place(x = 20, y = 50)
+
+user_inputs = {
+    "url": "",
+    "folder": "",
+    "csv": ""
+}
+
+url_input = Entry(window, width=60)
+url_input.place(x = 60, y = 50)
+url_input.focus_set()
+
+submit_button = Button(text="Scrape & Save", command=get_user_input)
+submit_button.place(x = 450, y =47, height = 23, width = 100)
+
+window.mainloop()
