@@ -52,6 +52,7 @@ There are some current limitations outside my control:
 - [ ] implement Windows duplicate naming, so if xxx.csv already exist, the new save file will be xxx (1).csv, xxx (2).csv 
 - [ ] manually crawl through HTML string and remove bs4 installation, one less package install
 - [ ] even more status update bar to update user on process
+- [ ] add pictures and videos
 
 
 
