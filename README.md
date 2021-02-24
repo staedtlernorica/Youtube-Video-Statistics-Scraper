@@ -1,24 +1,54 @@
-# Youtube-Video-Info-Scraper
+ # Youtube-Video-Info-Scraper (updated 23/02/2021)
 
-- [ ] User pandas and convert youtube JSON objects to more readable df (for readability purposes)
-   *https://stackoverflow.com/q/41168558/6030118
-- [x] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
-  - [ ] present option to remove all incomplete entries (eg from premium vids)
-  - [ ] goes well with passing scrape object to a final print/clean up module; leave scraping_playlist only with scraping playlist
-- [x] Try to use urllib instead of requests in scrape_channel, so one less package installation
+This script will automatically scrape the statistics<sup>1</sup> of every video from a playlist/or every video uploaded by a channel. All the user has to do is provide a playlist/channel URL, and the script will output the collected statistics of all videos as a .csv file.
 
-
-
-This script will automatically scrape the statistics<sup>1</sup> of every video from any channel/playlist the user gives it. There a few steps to complete to get this script working:
-* get your Youtube API key ([text](https://www.slickremix.com/docs/get-api-key-for-youtube/)/[video](https://www.youtube.com/watch?v=th5_9woFJmk) guide), and paste it into personal_api.py 
-* make sure you have Python 3.6+ installed 
-* copy/paste all the commands in the second column into the cmd:
-
-   Packages | Install command
+## Installation before using
+1) Download the files from the `main` branch. 
+2) Make sure these three packages are installed (in the global or virtual environment):
+*  copy/paste all three commands in the second column into either the Windows cmd/virtual env. terminal, then hit enter to install package
+  Packages | Install command 
    ------------ | -------------
    isodate | `pip install isodate`
    bs4 | `pip install bs4`
    googleapiclient | `pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib`
+3) supply your personal Youtube API key (free of charge) from Google
+*  get your Youtube API key ([text](https://www.slickremix.com/docs/get-api-key-for-youtube/)/[video](https://www.youtube.com/watch?v=th5_9woFJmk) guide), and paste it into personal_api.py
+
+Unless you
+
+Now the script is ready to scrape playlists and channels. Go to the youtube-scraper folder, and open up `main.pyw` file, and the GUI should pop up.
+
+## Usage
+<a href="url"><img src="https://i.imgur.com/3Vnkxrs.png" align="left" height="100" width="525" ></a>
+
+In my testing (not exhaustive as I'm only one person), the script is very resilient to errors (either by the user or by the program) and will not easily crash. If an incorrect URL is entered, or the Youtube servers doesn't play nice when scraping data (very unlikely), the program window will remain open, waiting for the correct URL<sup>2</sup> input.
+```
+
+## Limitations
+There are some current limitations outside my control:
+
+1. Only tested on Windows 10 (will possibly work 8.1/8/7; unsure for Mac/Linux)
+2. Can only scrape free and publicly available videos; will not work on premium/paid videos
+   * uncertain on how regionally locked videos will be affected
+3. Can only scrape public playlists
+4. Can only scrape channels with at least one uploaded video
+5. The amount of videos the script can scrape is limited by Google's daily [10,000 unit quota](https://developers.google.com/youtube/v3/getting-started#quota), i.e. exceed this quota, the script won't work until your next daily 10,000 quota. 
+   * keep in mind this is truly an obscene amount of scraping, easily equalling a thousand videos, maybe even more.
+
+
+## TODO
+
+- [ ] User pandas and convert youtube JSON objects to more readable df (for readability purposes)
+   *[low priority](https://stackoverflow.com/q/41168558/6030118)
+- [x] Use get() function to get video stats (avoid premium vids/contents throwing keyError)
+  - [ ] present option to remove all incomplete entries (eg from premium vids)
+  - [ ] goes well with passing scrape object to a final print/clean up module; leave scraping_playlist only with scraping playlist
+- [ ] implement a settings.txt, allow the user to set default_save_path and default_csv_name that persists after script is closed
+- [ ] implement Windows duplicate naming, so if xxx.csv already exist, the new save file will be xxx (1).csv, xxx (2).csv 
+- [ ] manually crawl through HTML string and remove bs4 installation, one less package install
+
+
+
 
 
 The program should function correctly afterwards. Double click on "main.pyw" and a simple GUI box should pop up like this:
@@ -33,20 +63,10 @@ The program should function correctly afterwards. Double click on "main.pyw" and
 3. In the `CSV name` field, if you leave it blank, the CSV will be named `Scraped Youtube dd/mm/yyyy.csv`.
 
 
-There are some limitations with the current script:
-1. Only works on Python 3.6+
-2. Only work on Windows 10 (possibly 8.1/8/7; have not been able to test)
-3. Can only scrape publicly available videos; will not work on premium/paid videos
-   * uncertain on how regionally locked videos will be affected
-4. Can only scrape public playlists
-5. Can only scrape channels with at least one uploaded video
-6. The script is limited up to Google's daily [10,000 unit quota](https://developers.google.com/youtube/v3/getting-started#quota), i.e. if you scrape an obscene amount of videos, the script won't work until your next daily 10,000 quota. 
-   * this truly is an obscene amount of scraping, easily equalling several thousands videos.
 
-If the script crashes, it's because it has run into an error, either from these limitations, or the link is wrong. 
-
-
-
-
+## Footnote
 
  <sup>1</sup> statistics includes, in order, the video title, date uploaded, views, likes, dislikes, comments, video id, duration (in seconds).
+ 
+ <sup>2</sup>
+ 
