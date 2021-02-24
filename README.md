@@ -19,10 +19,10 @@ Unless you
 Now the script is ready to scrape playlists and channels. Go to the youtube-scraper folder, and open up `main.pyw` file, and the GUI should pop up.
 
 ## Usage
-<a href="url"><img src="https://i.imgur.com/3Vnkxrs.png" align="left" height="100" width="525" ></a>
+<a href="url"><img src="https://i.imgur.com/3Vnkxrs.png" align="left" height="125" width="525" ></a>
 
 In my testing (not exhaustive as I'm only one person), the script is very resilient to errors (either by the user or by the program) and will not easily crash. If an incorrect URL is entered, or the Youtube servers doesn't play nice when scraping data (very unlikely), the program window will remain open, waiting for the correct URL<sup>2</sup> input.
-```
+
 
 ## Limitations
 There are some current limitations outside my control:
