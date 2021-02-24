@@ -58,9 +58,6 @@ There are some current limitations outside my control:
 
 The program should function correctly afterwards. Double click on "main.pyw" and a simple GUI box should pop up like this:
 
-![GUI pic](https://i.imgur.com/TFC0kHl.png)
-
-1. In the `Link` field, you can copy/paste the link of any channel/playlist, and the script will determine if the link leads to a channel/or playlist.
 
 2. In the `Save CSV to` field, if you leave it blank, the CSV will be created on your desktop (i.e. I've set the default save path as `C:\Users\username\Desktop` in case one isn't enter/chosen)
       * if your default drive letter is different/don't have a Desktop folder for some reason/are on Linux or MacOS, then the program won't run at all.
