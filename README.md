@@ -3,6 +3,8 @@
 This script will automatically scrape the statistics<sup>1</sup> of every video from a playlist/or every video uploaded by a channel. All the user has to do is provide a playlist/channel URL, and the script will output the collected statistics of all videos as a .csv file.
 
 ## Installation before using
+This readme assumes that you are at least Python beginner who can write/edit .py files. 
+
 1) Download the files from the `main` branch. 
 2) Make sure these three packages are installed (in the global or virtual environment):
 *  copy/paste all three commands in the second column into either the Windows cmd/virtual env. terminal, then hit enter to install package
@@ -12,16 +14,19 @@ This script will automatically scrape the statistics<sup>1</sup> of every video 
    bs4 | `pip install bs4`
    googleapiclient | `pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib`
 3) supply your personal Youtube API key (free of charge) from Google
-*  get your Youtube API key ([text](https://www.slickremix.com/docs/get-api-key-for-youtube/)/[video](https://www.youtube.com/watch?v=th5_9woFJmk) guide), and paste it into personal_api.py
+*  get your Youtube API key ([text](https://www.slickremix.com/docs/get-api-key-for-youtube/)/[video](https://www.youtube.com/watch?v=th5_9woFJmk) guide)
+*  follow the direction in personal_api.py and paste your API key
 
-Unless you
 
-Now the script is ready to scrape playlists and channels. Go to the youtube-scraper folder, and open up `main.pyw` file, and the GUI should pop up.
+Now the script is ready to scrape playlists and channels. Doubble click on `main.pyw`, and the GUI should pop up.
 
 ## Usage
 <a href="url"><img src="https://i.imgur.com/3Vnkxrs.png" align="left" height="125" width="525" ></a>
 
-In my testing (not exhaustive as I'm only one person), the script is very resilient to errors (either by the user or by the program) and will not easily crash. If an incorrect URL is entered, or the Youtube servers doesn't play nice when scraping data (very unlikely), the program window will remain open, waiting for the correct URL<sup>2</sup> input.
+
+To scrape any playlist or channel, simply copy/paste (or type) the appropriate<sup>2</sup> Youtube URL into the entry box, then click the `Scrape & Save` button. Once the statistics are scraped, a Save As dialog box will pop up, asking the user where to save the .csv file. <sup>3</sup>. Once the .csv is saved, the script is ready to scrape another channel/playlist, repeating the same steps.
+
+If the playlist or channel has a lot of videos, the Save As dialog box might take a second (or several) to pop up, as it has to wait for the script to finish scraping the videos for statistics. In my testing, the script is very resilient to errors and will not easily crash or hang.  
 
 
 ## Limitations
@@ -46,7 +51,7 @@ There are some current limitations outside my control:
 - [ ] implement a settings.txt, allow the user to set default_save_path and default_csv_name that persists after script is closed
 - [ ] implement Windows duplicate naming, so if xxx.csv already exist, the new save file will be xxx (1).csv, xxx (2).csv 
 - [ ] manually crawl through HTML string and remove bs4 installation, one less package install
-
+- [ ] even more status update bar to update user on process
 
 
 
@@ -70,3 +75,4 @@ The program should function correctly afterwards. Double click on "main.pyw" and
  
  <sup>2</sup>
  
+ <sup>3</sup>
