@@ -56,6 +56,8 @@ There are some current limitations outside my control:
 - [ ] add pictures and videos to guide user through
   - [ ] examples of playlist/channel and resulting csv
 - [ ] error message box (eg no API key, wrong URL entry, no package detected)
+- [ ] another status bar that shows channel/playlist to be scrape
+  - [ ] grey out scrape and save bar until ths bar finishes 
 
 
 
