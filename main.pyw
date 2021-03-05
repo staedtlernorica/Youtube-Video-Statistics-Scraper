@@ -29,12 +29,12 @@ def ask_directory(x):
 #https://stackoverflow.com/a/15495560/6030118
 def get_user_input():
 
-    user_inputs["url"] = url_input.get()
+    # user_inputs["url"] = url_input.get()
     user_input = url_input.get()
 
-    parsed_link = ''
     scraped_info = []
-    if user_inputs['url'] != '':
+    # if user_inputs['url'] != '':
+    if user_inputs != '':    
         
         id_tuple = pui.main(user_input)
         
@@ -53,7 +53,7 @@ def get_user_input():
 #close when press Esc 
 #https://stackoverflow.com/a/28467330/6030118
 import sys
-def close(event):
+def close_on_escape(event):
     window.withdraw() # if you want to bring it back
     sys.exit() # if you want to exit the entire thing
 
@@ -89,7 +89,7 @@ url_input.focus_set()
 submit_button = Button(text="Scrape & Save", command=get_user_input, font = (None, 11))
 submit_button.place(x = 388, y =70, height = 25, width = 125)
 
-window.bind('<Escape>', close)
+window.bind('<Escape>', close_on_escape)
 
 
 window.mainloop()
