@@ -58,6 +58,7 @@ There are some current limitations outside my control:
 - [ ] error message box (eg no API key, wrong URL entry, no package detected)
 - [ ] another status bar that shows channel/playlist to be scrape
   - [ ] grey out scrape and save bar until ths bar finishes 
+- [ ] [make web app w/ Flask](https://realpython.com/python-web-applications/)
 
 
 
