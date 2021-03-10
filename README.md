@@ -59,6 +59,7 @@ There are some current limitations outside my control:
 - [ ] another status bar that shows channel/playlist to be scrape
   - [ ] grey out scrape and save bar until ths bar finishes 
 - [ ] [make web app w/ Flask](https://realpython.com/python-web-applications/)
+- [ ] for hundred of thousands of videos (e.g. IGN channel-stopped at 20,000 videos), implement an already scraped list to skip already scraped video, avoid wasting time and quota. (ambitious?)
 
 
 
