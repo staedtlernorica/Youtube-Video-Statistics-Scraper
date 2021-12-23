@@ -2,4 +2,5 @@ __pycache__
 
 *.pyc
 
-#personal_api.py
+personal_api.py
+#when creating a new branch, a generic personal_api.py is included; deleted this generic one, commit and push to github,then paste the one with the real API key in, which github will then ignore
