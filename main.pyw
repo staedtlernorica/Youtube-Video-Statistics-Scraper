@@ -2,8 +2,9 @@ from tkinter import *
 from tkinter import filedialog
 import os
 import csv
-import scrape_playlist as sp
 import scrape_channel as sc
+import scrape_playlist as sp
+
 import config
 import parse_user_input as pui
 
